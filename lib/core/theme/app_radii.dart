@@ -3,9 +3,11 @@
 class AppRadii {
   AppRadii._();
 
-  static const double card = 20;
-  static const double button = 16;
-  static const double chip = 999; // pill
+  static const double card = 24;
+  static const double button = 12;
+  static const double input = 12;
+  static const double chip = 999;
+
 
   static const double spaceXs = 8;
   static const double spaceSm = 12;

@@ -5,19 +5,32 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static const Color primaryText = Color(0xFF344054); // Azul Ardósia
-  static const Color background = Color(0xFFFDFBF7); // Off-white
-  static const Color surface = Color(0xFFF5F6F8);
+  static const Color primary = Color(0xFF6B4EFF); // Roxo Cuidar+
+  static const Color primaryText = Color(0xFF1D2939); // Cinza Escuro / Texto
+  static const Color secondaryText = Color(0xFF667085); // Cinza Médio
+  static const Color background = Color(0xFFF9FAFB); // Fundo ultra claro
+  static const Color surface = Colors.white;
 
-  static const Color peach = Color(0xFFF6B978);
-  static const Color mint = Color(0xFF91DCC1);
-  static const Color lavender = Color(0xFFB99BCB);
-  static const Color pastelYellow = Color(0xFFF6D76F);
+  static const Color purpleLight = Color(0xFFF4F3FF);
+  static const Color peachLight = Color(0xFFFFF4ED);
+  static const Color mintLight = Color(0xFFECFDF3);
+  static const Color yellowLight = Color(0xFFFEFBE8);
+  static const Color blueLight = Color(0xFFF0F9FF);
+
+  static const Color purple = Color(0xFF7F56D9);
+  static const Color peach = Color(0xFFF79009);
+  static const Color mint = Color(0xFF12B76A);
+  static const Color yellow = Color(0xFFFAC515);
+  static const Color blue = Color(0xFF2E90FA);
 
   static const Color success = mint;
-  static const Color warning = pastelYellow;
-  static const Color info = lavender;
-  static const Color accent = peach;
+  static const Color warning = yellow;
+  static const Color info = blue;
+  static const Color error = Color(0xFFF04438);
 
-  static const List<Color> journeyPalette = [peach, lavender, mint, pastelYellow];
+  // Aliases para compatibilidade legada
+  static const Color lavender = purpleLight;
+  static const Color pastelYellow = yellowLight;
+
+
 }

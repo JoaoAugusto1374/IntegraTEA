@@ -38,6 +38,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         MaterialPageRoute(builder: (_) => isLoggedIn ? const AppShell() : const LoginScreen()),
       );
     });
+
+
   }
 
   @override
@@ -66,16 +68,20 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             const SizedBox(height: 28),
             FadeTransition(
               opacity: _controller,
-              child: Text('Cuidar+', style: AppTextStyles.displayLg),
+              child: Text(
+                'Cuidar+',
+                style: AppTextStyles.displayLg.copyWith(color: AppColors.primary),
+              ),
             ),
             const SizedBox(height: 8),
             FadeTransition(
               opacity: _controller,
               child: Text(
                 'Cuidado contínuo, do jeito certo.',
-                style: AppTextStyles.body.copyWith(color: AppColors.primaryText.withValues(alpha: 0.7)),
+                style: AppTextStyles.body.copyWith(color: AppColors.secondaryText),
               ),
             ),
+
           ],
         ),
       ),
@@ -103,7 +109,8 @@ class _RadialBloomPainter extends CustomPainter {
       final angle = (2 * math.pi / petalCount) * i - math.pi / 2;
       final petalCenter = center + Offset(math.cos(angle), math.sin(angle)) * radius;
 
-      final paint = Paint()..color = _petalColors[i].withValues(alpha: 0.9);
+      final paint = Paint()..color = _petalColors[i].withOpacity(0.9);
+
 
       canvas.save();
       canvas.translate(petalCenter.dx, petalCenter.dy);

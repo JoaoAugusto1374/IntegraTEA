@@ -12,9 +12,6 @@ import '../auth/auth_repository.dart';
 import '../supabase/supabase_config.dart';
 
 /// Camada de acesso a dados do Cuidar+, sobre o schema REAL do Supabase
-/// (ver `supabase/SCHEMA.md`). Erros de conexão/consulta são propagados como
-/// [CuidarAuthException] — nunca escondidos atrás de dado de demonstração,
-/// para que problemas reais de conectividade fiquem visíveis na UI.
 class CareRepository {
   CareRepository();
 

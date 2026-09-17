@@ -18,9 +18,14 @@ class CareJourneyStepper extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (var i = 0; i < events.length; i++) ...[
-            _StepNode(event: events[i], isCurrent: i == events.length - 1),
+            _StepNode(
+              event: events[i],
+              isCurrent: i == events.length - 1,
+              index: i,
+            ),
             if (i != events.length - 1) const _StepConnector(active: true),
           ],
         ],
@@ -29,28 +34,56 @@ class CareJourneyStepper extends StatelessWidget {
   }
 }
 
+
 class _StepNode extends StatelessWidget {
   final JourneyEvent event;
   final bool isCurrent;
+  final int index;
 
-  const _StepNode({required this.event, required this.isCurrent});
+  const _StepNode({required this.event, required this.isCurrent, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final colors = [
+      AppColors.peach,
+      AppColors.purple,
+      AppColors.mint,
+      AppColors.yellow,
+      AppColors.blue,
+    ];
+    final color = colors[index % colors.length];
+    final lightColor = [
+      AppColors.peachLight,
+      AppColors.purpleLight,
+      AppColors.mintLight,
+      AppColors.yellowLight,
+      AppColors.blueLight,
+    ][index % colors.length];
+
     final dateFormat = DateFormat('dd/MM');
+    
+    IconData icon;
+    switch (event.label.toLowerCase()) {
+      case String s when s.contains('entrada'): icon = Icons.login; break;
+      case String s when s.contains('triagem'): icon = Icons.assignment_outlined; break;
+      case String s when s.contains('fila'): icon = Icons.people_outline; break;
+      case String s when s.contains('atendimento'): icon = Icons.medical_services_outlined; break;
+      case String s when s.contains('continuidade'): icon = Icons.trending_up; break;
+      default: icon = Icons.check_circle_outline;
+    }
+
     return SizedBox(
-      width: 96,
+      width: 100,
       child: Column(
         children: [
           Container(
-            width: isCurrent ? 48 : 36,
-            height: isCurrent ? 48 : 36,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isCurrent ? AppColors.peach : AppColors.mint,
-              border: isCurrent ? Border.all(color: AppColors.primaryText, width: 2) : null,
+              color: lightColor,
             ),
-            child: isCurrent ? null : const Icon(Icons.check_rounded, color: Colors.white, size: 18),
+            child: Icon(icon, color: color, size: 22),
           ),
           const SizedBox(height: 8),
           Text(
@@ -58,14 +91,19 @@ class _StepNode extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.label,
+            style: AppTextStyles.label.copyWith(fontSize: 12),
           ),
-          Text(dateFormat.format(event.createdAt), style: AppTextStyles.bodySm.copyWith(fontSize: 11)),
+          const SizedBox(height: 2),
+          if (isCurrent)
+            const Icon(Icons.check_circle, color: AppColors.mint, size: 16)
+          else
+            Text(dateFormat.format(event.createdAt), style: AppTextStyles.bodySm.copyWith(fontSize: 10)),
         ],
       ),
     );
   }
 }
+
 
 class _StepConnector extends StatelessWidget {
   final bool active;
@@ -75,13 +113,14 @@ class _StepConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 28,
-      height: 3,
-      margin: const EdgeInsets.only(bottom: 30),
+      width: 32,
+      height: 2,
+      margin: const EdgeInsets.only(top: 22),
       decoration: BoxDecoration(
-        color: active ? AppColors.mint : AppColors.surface,
+        color: active ? Colors.grey.shade200 : AppColors.surface,
         borderRadius: BorderRadius.circular(2),
       ),
     );
   }
 }
+

@@ -45,6 +45,8 @@ class _AppShellState extends State<AppShell> {
     return _ShellData(profile: profile, patients: patients);
   }
 
+
+
   Future<void> _signOut() async {
     await _authRepository.signOut();
     if (!mounted) return;
@@ -74,8 +76,14 @@ class _AppShellState extends State<AppShell> {
 
         final tabs = <Widget>[
           hasPatient
-              ? HomeScreen(key: ValueKey('home-$_selectedPatientId'), patientId: _selectedPatientId!)
+              ? HomeScreen(
+                  key: ValueKey('home-$_selectedPatientId'),
+                  patientId: _selectedPatientId!,
+                  profileName: data.profile.fullName,
+
+                )
               : const _NoPatientLinked(),
+
           hasPatient
               ? QueueScreen(key: ValueKey('queue-$_selectedPatientId'), patientId: _selectedPatientId!)
               : const _NoPatientLinked(),

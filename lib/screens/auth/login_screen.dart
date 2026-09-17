@@ -68,17 +68,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Cuidar+', style: AppTextStyles.displayLg),
-                    const SizedBox(height: 4),
+                    Text('Cuidar+', style: AppTextStyles.displayLg.copyWith(color: AppColors.primary)),
+                    const SizedBox(height: 8),
                     Text(
                       'Entre com sua conta para acompanhar o cuidado.',
-                      style: AppTextStyles.body.copyWith(color: AppColors.primaryText.withValues(alpha: 0.7)),
+                      style: AppTextStyles.body.copyWith(color: AppColors.secondaryText),
                     ),
                     const SizedBox(height: AppRadii.spaceXl),
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(labelText: 'E-mail'),
+                      decoration: const InputDecoration(
+                        labelText: 'E-mail',
+                        hintText: 'seu@email.com',
+                      ),
                       validator: (value) =>
                           (value == null || !value.contains('@')) ? 'Informe um e-mail válido' : null,
                     ),
@@ -86,7 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
-                      decoration: const InputDecoration(labelText: 'Senha'),
+                      decoration: const InputDecoration(
+                        labelText: 'Senha',
+                        hintText: '••••••••',
+                      ),
                       validator: (value) => (value == null || value.isEmpty) ? 'Informe sua senha' : null,
                       onFieldSubmitted: (_) => _submit(),
                     ),
@@ -95,12 +101,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         padding: const EdgeInsets.all(AppRadii.spaceSm),
                         decoration: BoxDecoration(
-                          color: AppColors.peach.withValues(alpha: 0.2),
+                          color: AppColors.error.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppRadii.button),
                         ),
-                        child: Text(_errorMessage!, style: AppTextStyles.bodySm),
+                        child: Text(
+                          _errorMessage!,
+                          style: AppTextStyles.bodySm.copyWith(color: AppColors.error),
+                        ),
                       ),
                     ],
+
                     const SizedBox(height: AppRadii.spaceLg),
                     SizedBox(
                       width: double.infinity,
